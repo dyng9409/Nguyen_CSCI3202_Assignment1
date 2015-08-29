@@ -5,13 +5,16 @@ class node(object):
     def __init__(self, key):
         #create node only specifying the key value
         #assignment of parent and children will be handled by methods
-
+        if key is not int:
+            print("Error, key must be of type (int)")
+            return
         self.key = key
         self.parent = None
         self.lchild = None
         self.rchild = None
 
     #utility functions to modify nodes
+    #setting a child will automatically set the child's parent
 
     def addLChild(self, child):
         self.lchild = child
@@ -55,6 +58,7 @@ class tree(object):
         else:
             self.root = root
         return
+
     def find(self, val):
         #finds the node with the associated key value
         #if no node is found, returns None
@@ -74,7 +78,6 @@ class tree(object):
             return rSub.find(val)
         else:
             return lSubResult
-
 
     def add(self, pval, chval):
         #add node, returns 0 if no add was made, returns 1 if add was succesful
@@ -96,10 +99,16 @@ class tree(object):
         return
 
     def delete(self, val):
+        #deletes the specified node if it is found
+        #prints error if not or node is unable to be deleted
+
         target = self.find(val)
         if target is None:
             print("Node not found")
             return
+
+        #only case where the target parent would be none is root
+        #so this is an edge case
         if target.parent is not None:
             parent = target.parent
             plchild = target.parent.lchild
@@ -122,6 +131,7 @@ class tree(object):
         return
 
     def printTree(self):
+        #basic traverse and print
         if self.root is None:
             return
         print(self.root.key)
