@@ -5,7 +5,7 @@ class node(object):
     def __init__(self, key):
         #create node only specifying the key value
         #assignment of parent and children will be handled by methods
-        if key is not int:
+        if type(key) is not int:
             print("Error, key must be of type (int)")
             return
         self.key = key
@@ -34,6 +34,12 @@ class tree(object):
             self.root = root
 
     #utility functions
+    def isEmpty(self):
+        if(self.root is None):
+            return True
+        else:
+            return False
+
     def getLSubTree(self):
         #returns a tree object created from the left subtree
         #if there is no left subtree, then returns a tree rooted with None (i.e. an empty tree)
@@ -49,6 +55,7 @@ class tree(object):
             return tree(None)
         else:
             return tree(self.root.rchild)
+
     def addRoot(self, root):
         #add a root if starting with an empty tree
         #first check if root alreayd exists
@@ -56,7 +63,7 @@ class tree(object):
         if self.root is not None:
             print("Tree already has root")
         else:
-            self.root = root
+            self.root = node(root)
         return
 
     def find(self, val):
@@ -131,10 +138,10 @@ class tree(object):
         return
 
     def printTree(self):
-        #basic traverse and print
+        #basic DF traverse and print
         if self.root is None:
             return
-        print(self.root.key)
+        print(self.root.key),
         lSub = self.getLSubTree()
         rSub = self.getRSubTree()
 

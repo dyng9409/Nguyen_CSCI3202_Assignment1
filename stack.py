@@ -18,7 +18,7 @@ class stack(object):
         #gets size of the stack
         return self.size 
 
-    def checkEmpty(self):
+    def isEmpty(self):
         #checks if the stack is empty
         return (self.checkSize() == 0)
 
@@ -33,7 +33,7 @@ class stack(object):
 
     def pop(self):
         #removes and returns the last value added to the stack
-        if self.checkEmpty():
+        if self.isEmpty():
             print('Stack is empty')
             return 0;
         else:
